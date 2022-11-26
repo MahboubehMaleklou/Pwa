@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { JwksValidationHandler, OAuthService } from 'angular-oauth2-oidc';
+import { OAuthService } from 'angular-oauth2-oidc';
+import { JwksValidationHandler } from 'angular-oauth2-oidc-jwks';
 import { authCodeFlowConfig } from './sso.config';
 
 @Component({
@@ -24,5 +25,13 @@ export class AppComponent {
     this.oauthservice.initImplicitFlow();
   }
 
-  logout(): void {}
+  logout(): void {
+    this.oauthservice.logOut()
+  }
+
+  token(): any {
+    let claims:any = this.oauthservice.getIdentityClaims;
+    console.log(claims)
+    return claims ? claims : null
+  }
 }
